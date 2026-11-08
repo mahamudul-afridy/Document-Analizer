@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; }
+  body { @apply bg-cream text-ink-soft font-sans; }
+  h1, h2, h3 { @apply font-display font-bold text-ink; letter-spacing: -0.02em; }
+  ::selection { background: #e57824; color: #fff; } /* (ref) */
+  *:focus-visible { @apply outline-none ring-2 ring-accent-400 ring-offset-2 ring-offset-cream; }
+}
+
+@layer components {
+  .card { @apply bg-white rounded-2xl border border-line shadow-soft; }
+  .input {
+    @apply w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70
+           transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100 focus:outline-none;
+  }
+  .label { @apply mb-1.5 block text-[11px] font-bold uppercase tracking-[0.08em] text-muted; }
+  .eyebrow { @apply text-xs font-bold uppercase tracking-[0.16em] text-accent-500; }
+  .table-head { @apply px-4 py-3 text-left text-[11px] font-bold uppercase tracking-[0.08em] text-muted bg-cream/70; }
+  .table-cell { @apply px-4 py-3.5 text-sm text-ink border-t border-line; }
+  .skeleton {
+    @apply rounded-lg bg-gradient-to-r from-cream-dark via-white to-cream-dark;
+    background-size: 800px 100%;
+    animation: shimmer 1.4s linear infinite;
+  }
+}
+
+.scrollbar-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+
+@media print {
+  aside, header { display: none !important; }
+  main { overflow: visible !important; }
+}

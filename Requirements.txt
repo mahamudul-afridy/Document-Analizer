@@ -1,0 +1,502 @@
+# Project: AI-Powered Document Intelligence System
+
+## 1. Project Overview
+
+Build a complete, production-quality AI-Powered Document Intelligence System for processing, extracting, validating, managing, and searching business documents.
+
+The application should automate the processing of thousands of business documents, including:
+- Digital and scanned PDF files.
+- JPG, JPEG, PNG, and TIFF images.
+- Excel files (XLSX and XLS).
+- CSV files.
+
+The system must extract financial and invoice information, perform cross-document verification, detect inconsistencies, and provide searchable structured information through a modern web dashboard and REST API.
+
+**IMPORTANT: Website Design and Branding Reference**
+
+Use the following website as the primary visual reference for the entire application's design, branding, colors, typography, spacing, component styling, and overall user experience:
+
+https://cottagehomecare.com/
+
+Do not copy its business content, logo, or healthcare-related elements. Adapt its visual identity to a professional AI-powered enterprise document intelligence platform.
+
+## 2. Design Direction and Branding
+
+Create a premium, welcoming, professional, and trustworthy SaaS interface.
+
+Follow the reference website's visual characteristics:
+
+- Clean and spacious layouts.
+- Warm, light-colored backgrounds.
+- Elegant green/teal-inspired brand accents.
+- Strong, readable typography.
+- Rounded cards and containers.
+- Soft shadows and subtle borders.
+- Large, clear headings.
+- Generous whitespace.
+- Beautifully organized content sections.
+- Professional photography or appropriate document-related illustrations.
+- Smooth transitions and subtle hover animations.
+- Consistent visual hierarchy.
+
+### Suggested Color System
+
+Use these as initial design tokens and refine them to visually match the reference website.
+
+- Primary: Deep Forest Green (#174D3A)
+- Secondary: Sage Green (#769B83)
+- Accent: Soft Mint (#E4F0E8)
+- Background: Warm Off-White (#F8F8F4)
+- Surface: White (#FFFFFF)
+- Primary Text: Dark Charcoal (#25332C)
+- Secondary Text: Muted Gray (#758078)
+- Borders: Soft Gray-Green (#E3E9E3)
+- Success: Green
+- Warning: Warm Amber
+- Error: Muted Red
+
+Avoid excessive gradients, neon colors, dark backgrounds, and unnecessarily complicated UI elements.
+
+The final application should look like an established enterprise SaaS product, not a generic AI dashboard template.
+
+## 3. Application Branding
+
+Create a professional identity for the platform.
+
+Suggested product name: DocuMind AI
+
+Tagline: Intelligent Document Processing. Accurate Financial Insights.
+
+Create:
+- Minimal professional logo.
+- Consistent brand colors.
+- Custom application favicon.
+- Sidebar branding.
+- Login page branding.
+- Dashboard identity.
+- Consistent iconography.
+
+## 4. Technology Stack
+
+Frontend:
+- React.js or Next.js.
+- TypeScript.
+- Tailwind CSS.
+- Lucide Icons.
+- Recharts for analytics.
+- React Query for API state management.
+
+Backend:
+- Python.
+- FastAPI.
+- REST API architecture.
+- Background task processing using Celery and Redis.
+
+Document Processing:
+- PyMuPDF for digital PDF extraction.
+- OCR using PaddleOCR or Tesseract.
+- OpenCV for image preprocessing.
+- pandas and openpyxl for Excel and CSV processing.
+- LLM API for structured information extraction.
+
+Database:
+- PostgreSQL.
+- pgvector for semantic search.
+- Redis for task queues and caching.
+
+Infrastructure:
+- Docker and Docker Compose.
+- Environment-based configuration.
+- Secure file storage.
+- Structured application logging.
+
+## 5. Main Application Layout
+
+Build a responsive application with a persistent sidebar and a clean top navigation bar.
+
+### Sidebar Navigation
+
+1. Overview
+2. Documents
+3. Upload Documents
+4. Processing Queue
+5. Extracted Invoices
+6. Validation & Verification
+7. Document Search
+8. Analytics & Reports
+9. API Management
+10. Settings
+
+The sidebar should have:
+- Brand logo and application name.
+- Clean icons.
+- Active navigation highlighting.
+- Collapsible functionality.
+- User profile section at the bottom.
+
+### Top Navigation
+
+Include:
+- Current page title.
+- Global search.
+- Notification icon.
+- Processing status indicator.
+- User profile dropdown.
+
+## 6. Dashboard
+
+Create a visually attractive overview dashboard.
+
+Display KPI cards:
+
+- Total Documents Processed.
+- Successfully Processed.
+- Pending Documents.
+- Failed Processing Jobs.
+- Invoices Extracted.
+- Documents Requiring Manual Review.
+
+Include:
+
+### Analytics Sections
+- Document processing activity over time.
+- Successful vs failed processing.
+- Document type distribution.
+- Invoice financial overview.
+- Validation error statistics.
+- Recent processing activity.
+
+### Recent Documents Table
+
+Columns:
+- Document Name.
+- Document Type.
+- Upload Date.
+- Processing Status.
+- Extracted Invoice Number.
+- Total Amount.
+- Validation Status.
+- Actions.
+
+Use realistic demo data for the UI, but clearly distinguish demo data from actual processed results.
+
+## 7. Document Upload and Processing
+
+Create a professional multi-file upload interface.
+
+Features:
+- Drag-and-drop upload.
+- Multiple file selection.
+- File type validation.
+- File size validation.
+- Upload progress.
+- Individual file status.
+- Bulk upload.
+- Retry failed uploads.
+
+Supported formats:
+PDF, JPG, JPEG, PNG, TIFF, XLSX, XLS, CSV.
+
+After uploading, create background processing jobs.
+
+Show processing stages:
+
+1. File Uploaded.
+2. Document Classification.
+3. Text Extraction / OCR.
+4. AI Information Extraction.
+5. Data Validation.
+6. Cross-Document Verification.
+7. Processing Completed.
+
+Allow users to monitor processing progress in real time.
+
+## 8. AI Information Extraction
+
+Extract the following information from invoices:
+
+- Invoice Number.
+- Invoice Date.
+- Supplier Name.
+- Customer Name.
+- Subtotal.
+- Tax.
+- Total Amount.
+- Currency.
+- Line Items.
+
+For each line item, extract:
+- Description.
+- Quantity.
+- Unit Price.
+- Tax.
+- Line Total.
+
+Return structured JSON.
+
+Important rules:
+- Never invent missing information.
+- Return null for unavailable fields.
+- Track confidence scores where supported.
+- Preserve source document references.
+- Flag uncertain extraction results.
+- Allow manual correction.
+
+Example JSON:
+
+{
+  "invoice_number": "INV-2026-001",
+  "invoice_date": "2026-10-15",
+  "supplier_name": "ABC Corporation",
+  "customer_name": "XYZ Limited",
+  "subtotal": 1000.00,
+  "tax": 150.00,
+  "total": 1150.00,
+  "currency": "USD",
+  "line_items": [],
+  "confidence": {},
+  "validation_status": "passed"
+}
+
+## 9. Data Validation and Cross-Document Verification
+
+Build an intelligent validation engine.
+
+Implement:
+
+- Missing field detection.
+- Numeric validation.
+- Duplicate invoice detection.
+- Subtotal verification.
+- Tax calculation verification.
+- Line item total verification.
+- Invoice total verification.
+- PDF-to-PDF comparison.
+- PDF-to-Excel comparison.
+- Excel-to-CSV comparison.
+
+Show discrepancies in a dedicated validation interface.
+
+Each validation result should include:
+- Validation rule.
+- Expected value.
+- Extracted value.
+- Difference.
+- Severity.
+- Source document.
+- Review status.
+
+Use clear visual indicators for:
+- Passed.
+- Warning.
+- Failed.
+- Requires Manual Review.
+
+Never silently modify extracted financial values.
+
+## 10. Document Management
+
+Create a document management page with:
+
+- Searchable document table.
+- Advanced filtering.
+- Document preview.
+- Extracted information panel.
+- Processing history.
+- Validation history.
+- Download original document.
+- Download extracted JSON.
+- Reprocess document.
+- Delete document with confirmation.
+
+Create a split-view document inspection interface:
+
+Left panel: PDF/image document viewer.
+
+Right panel: Extracted invoice information with editable fields.
+
+Highlight source regions where possible to help users verify extracted information.
+
+## 11. Search System
+
+Implement two search methods:
+
+### Keyword Search
+Search by:
+- Invoice number.
+- Supplier.
+- Customer.
+- Date.
+- Total amount.
+- Document name.
+
+### Semantic Search
+Allow natural-language searches such as:
+
+"Find all invoices from ABC Corporation above $5,000."
+
+"Show invoices with inconsistent tax calculations."
+
+"Find duplicate invoices uploaded last month."
+
+Display relevant results with source references.
+
+## 12. Frontend Pages
+
+Build the following complete pages:
+
+1. Login and authentication.
+2. Dashboard.
+3. Document upload.
+4. Document library.
+5. Processing queue.
+6. Invoice extraction details.
+7. Validation and cross-verification.
+8. Search and filtering.
+9. Analytics and reporting.
+10. API management.
+11. User and system settings.
+
+All pages must share the same design system and branding.
+
+## 13. Backend API
+
+Implement REST APIs for:
+
+- Authentication.
+- Document uploads.
+- Processing status.
+- Extracted results.
+- Document search.
+- Manual corrections.
+- Validation results.
+- Cross-document verification.
+- Failed-job reprocessing.
+- Analytics.
+- Document management.
+
+Use background processing for OCR and AI operations.
+
+Implement proper:
+- API validation.
+- Authentication and authorization.
+- Error handling.
+- Pagination.
+- Logging.
+- API documentation.
+
+## 14. Database Architecture
+
+Design PostgreSQL database tables for:
+
+- Users.
+- Documents.
+- Document Files.
+- Extracted Text.
+- Invoices.
+- Invoice Line Items.
+- Validation Results.
+- Processing Jobs.
+- Processing History.
+- Cross-Verification Results.
+- Manual Corrections.
+- Audit Logs.
+
+Use appropriate relationships, indexes, timestamps, and constraints.
+
+## 15. Security and Reliability
+
+Implement:
+
+- Secure authentication.
+- Role-based access control.
+- File upload validation.
+- File size restrictions.
+- Secure file storage.
+- Environment variables for secrets.
+- API rate limiting.
+- Audit logging.
+- Background job retry mechanisms.
+- Duplicate processing prevention.
+- Database transaction management.
+
+## 16. Testing and Evaluation
+
+Write automated tests for:
+
+- PDF processing.
+- OCR.
+- Image preprocessing.
+- Excel parsing.
+- CSV parsing.
+- AI extraction.
+- Financial validation.
+- Duplicate detection.
+- Cross-document verification.
+- API endpoints.
+- Background jobs.
+- Failure scenarios.
+
+Generate an evaluation report containing actual measured:
+- Extraction accuracy.
+- Processing time.
+- Document success rate.
+- Failure rate.
+
+Do not fabricate evaluation metrics.
+
+## 17. Development Requirements
+
+Follow a modular and maintainable architecture.
+
+Separate frontend, backend, document processing, AI extraction, validation, database, and background worker modules.
+
+Use reusable frontend components.
+
+Maintain clean code, proper naming conventions, and documentation.
+
+Create:
+- Complete project folder structure.
+- README.md.
+- .env.example.
+- Docker Compose configuration.
+- Database schema.
+- API documentation.
+- Architecture diagram.
+- Automated tests.
+
+Do not leave important features as non-functional placeholder buttons.
+
+Every major UI action should be connected to a working backend operation.
+
+If an external LLM API key is unavailable, implement a configurable provider interface and a clearly identified development mode.
+
+## 18. Final Design Quality
+
+The final product should feel like a premium enterprise SaaS application.
+
+Take visual inspiration from Cottage Home Care's:
+- Overall branding and color direction.
+- Typography and spacing.
+- Clean navigation.
+- Rounded card designs.
+- Section hierarchy.
+- Professional visual presentation.
+- Trust-building statistics.
+- Clear call-to-action elements.
+
+Adapt these principles to the document intelligence and financial automation industry.
+
+Ensure the interface works beautifully on desktop, tablet, and mobile.
+
+## Final Instruction
+
+First inspect the existing project directory and understand its current structure.
+
+Then create a development plan and implement the application systematically.
+
+Do not spend all the time creating mockup screens. Build a working document intelligence system with a beautiful, consistent frontend.
+
+The visual quality should be comparable to a professionally designed commercial SaaS product, while the backend must satisfy the technical requirements of the AI Engineer assignment.
+
+**Priority: Functional accuracy + premium UI/UX + maintainable architecture + reliable document processing.**

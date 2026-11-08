@@ -1,0 +1,11 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+backend/.storage/
+backend/tests/.storage/
+backend/tests/fixtures/generated/
+frontend/node_modules/
+frontend/dist/

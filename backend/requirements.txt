@@ -1,0 +1,43 @@
+# --- Web / API ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+pydantic-settings==2.7.0
+email-validator==2.2.0
+slowapi==0.1.9
+structlog==24.4.0
+httpx==0.28.1
+
+# --- Database ---
+sqlalchemy==2.0.36
+psycopg[binary]==3.2.3
+alembic==1.14.0
+pgvector==0.3.6
+
+# --- Security ---
+pyjwt==2.10.1
+argon2-cffi==23.1.0
+cryptography==44.0.0
+
+# --- Background jobs ---
+celery[redis]==5.4.0
+kombu==5.4.2
+redis==5.2.1
+
+# --- Document processing ---
+pymupdf==1.25.1
+opencv-python-headless==4.10.0.84
+pytesseract==0.3.13
+pillow==10.4.0
+numpy==2.2.1
+pandas==2.2.3
+openpyxl==3.1.5
+xlrd==2.0.1
+python-dateutil==2.9.0.post0
+rapidfuzz==3.11.0
+
+# --- Semantic search (local embeddings, no API key) ---
+fastembed==0.5.1
+
+# --- Fixtures / evaluation ---
+reportlab==4.2.5
